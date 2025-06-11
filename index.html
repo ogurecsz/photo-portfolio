@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Мои лучшие фото</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f9f9ff, #dbeafe);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      color: #1e3a8a;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1300px;
+    }
+
+    .photo-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.3s;
+      width: 280px;
+    }
+
+    .photo-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .label {
+      padding: 15px;
+      font-size: 1.2em;
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <h1>Топ-10 моих фотографий</h1>
+  <div class="gallery">
+    <div class="photo-card"><img src="images/1.jpg"><div class="label">1 место</div></div>
+    <div class="photo-card"><img src="images/2.jpg"><div class="label">2 место</div></div>
+    <div class="photo-card"><img src="images/3.jpg"><div class="label">3 место</div></div>
+    <div class="photo-card"><img src="images/4.jpg"><div class="label">4 место</div></div>
+    <div class="photo-card"><img src="images/5.jpg"><div class="label">5 место</div></div>
+    <div class="photo-card"><img src="images/6.jpg"><div class="label">6 место</div></div>
+    <div class="photo-card"><img src="images/7.jpg"><div class="label">7 место</div></div>
+    <div class="photo-card"><img src="images/8.jpg"><div class="label">8 место</div></div>
+    <div class="photo-card"><img src="images/9.jpg"><div class="label">9 место</div></div>
+    <div class="photo-card"><img src="images/10.jpg"><div class="label">10 место</div></div>
+  </div>
+</body>
+</html>
