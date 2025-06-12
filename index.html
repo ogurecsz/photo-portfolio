@@ -9,12 +9,12 @@
     <style>
         :root {
             /* Default Light Theme */
-            --bg-gradient-start: #e0f2fe; /* Light blue */
-            --bg-gradient-end: #f3e8ff; /* Light purple */
-            --header-gradient-start: #3b82f6; /* Medium blue */
-            --header-gradient-end: #a78bfa; /* Medium purple */
-            --text-color-dark: #1f2937; /* Dark gray */
-            --text-color-light: #4b5563; /* Medium gray */
+            --bg-gradient-start: #e0f2fe;
+            --bg-gradient-end: #f3e8ff;
+            --header-gradient-start: #3b82f6;
+            --header-gradient-end: #a78bfa;
+            --text-color-dark: #1f2937;
+            --text-color-light: #4b5563;
             --card-bg: #ffffff;
             --shadow-light: rgba(0, 0, 0, 0.08);
             --shadow-medium: rgba(0, 0, 0, 0.15);
@@ -25,7 +25,7 @@
             --button-hover-bg: #1f2937;
         }
 
-        /* Dark Theme (более глубокая и насыщенная) */
+        /* Dark Theme (глубокая и насыщенная) */
         body.dark-theme {
             --bg-gradient-start: #0F1320; /* Очень тёмный, почти чёрный сине-фиолетовый */
             --bg-gradient-end: #1C243B; /* Чуть светлее, тёмно-синий */
@@ -45,38 +45,56 @@
 
         /* Red Theme */
         body.red-theme {
-            --bg-gradient-start: #fef2f2;
-            --bg-gradient-end: #fee2e2;
-            --header-gradient-start: #ef4444;
-            --header-gradient-end: #dc2626;
-            --text-color-dark: #4b0d0d;
-            --text-color-light: #881a1a;
+            --bg-gradient-start: #ffe0e0; /* Светло-красный */
+            --bg-gradient-end: #ffc0c0; /* Чуть насыщеннее красный */
+            --header-gradient-start: #e74c3c; /* Красный */
+            --header-gradient-end: #c0392b; /* Темно-красный */
+            --text-color-dark: #7b241c;
+            --text-color-light: #a93226;
             --card-bg: #ffffff;
             --shadow-light: rgba(0, 0, 0, 0.08);
             --shadow-medium: rgba(0, 0, 0, 0.15);
-            --card-title-gradient-start: #ef4444;
-            --card-title-gradient-end: #dc2626;
-            --button-bg: #ef4444;
+            --card-title-gradient-start: #e74c3c;
+            --card-title-gradient-end: #c0392b;
+            --button-bg: #e74c3c;
             --button-text: white;
-            --button-hover-bg: #dc2626;
+            --button-hover-bg: #c0392b;
         }
 
         /* Green Theme */
         body.green-theme {
-            --bg-gradient-start: #ecfdf5;
-            --bg-gradient-end: #d1fae5;
-            --header-gradient-start: #10b981;
-            --header-gradient-end: #059669;
-            --text-color-dark: #064e3b;
-            --text-color-light: #0d8a66;
+            --bg-gradient-start: #e0ffe0; /* Светло-зеленый */
+            --bg-gradient-end: #c0ffc0; /* Чуть насыщеннее зеленый */
+            --header-gradient-start: #27ae60; /* Зеленый */
+            --header-gradient-end: #229a53; /* Темно-зеленый */
+            --text-color-dark: #196f3d;
+            --text-color-light: #238a4d;
             --card-bg: #ffffff;
             --shadow-light: rgba(0, 0, 0, 0.08);
             --shadow-medium: rgba(0, 0, 0, 0.15);
-            --card-title-gradient-start: #10b981;
-            --card-title-gradient-end: #059669;
-            --button-bg: #10b981;
+            --card-title-gradient-start: #27ae60;
+            --card-title-gradient-end: #229a53;
+            --button-bg: #27ae60;
             --button-text: white;
-            --button-hover-bg: #059669;
+            --button-hover-bg: #229a53;
+        }
+
+        /* Space Theme */
+        body.space-theme {
+            --bg-gradient-start: #0f0c29; /* Очень темный синий */
+            --bg-gradient-end: #302b63; /* Глубокий фиолетовый */
+            --header-gradient-start: #ff00ff; /* Фуксия */
+            --header-gradient-end: #00ffff; /* Циан */
+            --text-color-dark: #e0f7fa; /* Очень светлый бирюзовый */
+            --text-color-light: #a7d9de; /* Светлый бирюзовый */
+            --card-bg: #1e1e3f; /* Тёмно-синий для карточек */
+            --shadow-light: rgba(0, 255, 255, 0.15); /* Подсвеченные тени */
+            --shadow-medium: rgba(0, 255, 255, 0.3);
+            --card-title-gradient-start: #ff00ff;
+            --card-title-gradient-end: #00ffff;
+            --button-bg: #ff00ff;
+            --button-text: white;
+            --button-hover-bg: #00ffff;
         }
 
         body {
@@ -91,7 +109,7 @@
             min-height: 100vh;
             padding: 40px 20px;
             box-sizing: border-box;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            transition: background 0.5s ease, color 0.5s ease; /* Плавный переход для фона */
         }
 
         header {
@@ -150,7 +168,7 @@
 
         .gallery-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1500px; /* Увеличена максимальная ширина для широких экранов */
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
@@ -175,23 +193,24 @@
 
         .photo-card-img-wrapper {
             width: 100%;
-            /* Ограничиваем максимальную высоту враппера, чтобы картинки не были слишком большими */
-            max-height: 250px; 
-            overflow: hidden; /* Скрываем излишки, если картинка всё же больше */
-            display: flex; /* Используем flex для центрирования картинки */
-            justify-content: center;
-            align-items: center;
+            padding-bottom: 75%; /* Соотношение сторон 4:3 (для 16:9 будет 56.25%) */
+            /* ИЛИ: min-height: 200px; max-height: 300px; для более фиксированных размеров */
+            position: relative; /* Для позиционирования img внутри */
+            overflow: hidden;
             border-radius: 20px 20px 0 0;
-            background-color: #f0f0f0; /* Фоновый цвет для пустых пространств */
-            box-sizing: border-box; /* Учитываем padding в размере */
+            background-color: var(--card-bg); /* Цвет фона враппера, если картинка не заполняет его */
         }
 
         .photo-card img {
-            width: 100%; /* Занимаем всю ширину контейнера */
-            height: auto; /* Высота подстраивается под пропорции */
-            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: contain; /* Сохраняет пропорции, вписывая изображение */
-            image-rendering: optimizeQuality; /* Улучшение качества изображения */
+            object-position: center; /* Центрирует изображение */
+            display: block;
+            image-rendering: optimizeQuality;
         }
 
         .card-content {
@@ -219,15 +238,43 @@
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding-top 0.5s ease-out; /* Плавное появление */
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding-top 0.5s ease-out;
             padding-top: 0;
+            /* Фиксированная высота для всех описаний */
+            min-height: 4.5em; /* Примерно 3 строки текста (3 * 1.5em) */
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Ограничиваем до 3 строк */
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis; /* Добавляем многоточие если текст обрезается */
+        }
+        
+        .photo-card:hover .card-description {
+            max-height: 100px; /* Достаточная высота для 3+ строк */
+            opacity: 1;
+            padding-top: 10px;
         }
 
-        .photo-card:hover .card-description {
-            max-height: 100px; /* Достаточная высота для текста */
-            opacity: 1;
-            padding-top: 10px; /* Добавляем отступ сверху при появлении */
+        /* "Фишка": Эффект свечения при наведении на заголовок карточки */
+        .card-title {
+            position: relative;
+            z-index: 1;
         }
+        .card-title::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--card-title-gradient-start), var(--card-title-gradient-end));
+            transition: width 0.3s ease-out;
+            z-index: -1;
+        }
+        .photo-card:hover .card-title::before {
+            width: 80%;
+        }
+
 
         /* Keyframes for animations */
         @keyframes floatIn {
@@ -242,6 +289,13 @@
         }
 
         /* Responsive adjustments */
+        @media (min-width: 1200px) {
+            /* Для очень широких экранов, больше 4 колонок */
+            .gallery-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                /* Добавим более крупные gap или max-width при необходимости */
+            }
+        }
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5em;
@@ -286,6 +340,7 @@
         <button class="theme-button" data-theme="dark">Тёмная тема</button>
         <button class="theme-button" data-theme="red">Красная тема</button>
         <button class="theme-button" data-theme="green">Зелёная тема</button>
+        <button class="theme-button" data-theme="space">Космос тема</button>
     </div>
 
     <div class="gallery-container">
@@ -295,7 +350,7 @@
             </div>
             <div class="card-content">
                 <div class="card-title">1 Место</div>
-                <p class="card-description">Завораживающий закат, окрашивающий небо в яркие краски над морским пейзажем.</p>
+                <p class="card-description">Завораживающий закат, окрашивающий небо в яркие краски над морским пейзажем. </p>
             </div>
         </div>
         <div class="photo-card">
@@ -395,7 +450,7 @@
                     const theme = button.dataset.theme;
 
                     // Remove existing theme classes
-                    body.classList.remove('light-theme', 'dark-theme', 'red-theme', 'green-theme');
+                    body.classList.remove('light-theme', 'dark-theme', 'red-theme', 'green-theme', 'space-theme');
                     // Add new theme class
                     body.classList.add(theme + '-theme');
 
