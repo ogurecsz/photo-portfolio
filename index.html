@@ -191,15 +191,31 @@
             box-shadow: 0 15px 35px var(--shadow-medium);
         }
         
-        /* Изменения для изображений: вернули object-fit: cover */
+        /* Возвращаем стили изображений из позапрошлой версии */
         .photo-card img {
             width: 100%;
-            height: 200px; /* Фиксированная высота для единообразия карточек */
+            height: 250px; /* Увеличена высота, чтобы обрезка была более оптимальной */
             object-fit: cover; /* Изображение будет заполнять весь контейнер, обрезая лишнее */
             display: block;
             border-radius: 20px 20px 0 0;
-            /* Убрали background-color и padding отсюда */
+            /* Улучшение качества рендеринга и сглаживания */
+            image-rendering: -webkit-optimize-contrast; /* Для Webkit-браузеров */
+            image-rendering: crisp-edges; /* Для более чётких краёв, может помочь */
+            image-rendering: pixelated; /* Для пиксельных изображений, но может сделать обычные зернистыми, осторожно */
+            /* Попробую убрать image-rendering, оно может давать зернистость, если источник не идеален */
         }
+        
+        /* Исправление: Убираем image-rendering, чтобы избежать зернистости, оставляем только основные свойства */
+        .photo-card img {
+            width: 100%;
+            height: 250px; /* Оптимальная высота для хорошей обрезки */
+            object-fit: cover;
+            display: block;
+            border-radius: 20px 20px 0 0;
+            /* transform: translateZ(0); /* Может помочь с аппаратным ускорением и плавностью */
+            /* will-change: transform, opacity; /* Подсказка браузеру для оптимизации анимации */
+        }
+
 
         .card-content {
             padding: 20px;
@@ -219,6 +235,9 @@
             -webkit-text-fill-color: transparent;
             position: relative; /* Для эффекта свечения */
             z-index: 1;
+            /* Оптимизация для плавности линии */
+            transform: translateZ(0); /* Заставляет браузер использовать аппаратное ускорение */
+            will-change: transform, width; /* Подсказка браузеру для оптимизации анимации */
         }
 
         /* Эффект свечения под заголовком */
@@ -227,12 +246,13 @@
             position: absolute;
             bottom: -5px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateZ(0); /* Добавлено translateZ(0) для аппаратного ускорения */
             width: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--card-title-gradient-start), var(--card-title-gradient-end));
             transition: width 0.3s ease-out;
-            z-index: -1;
+            z-index: -1; /* Остаётся за заголовком */
+            will-change: width; /* Подсказка браузеру для оптимизации анимации */
         }
         .photo-card:hover .card-title::before {
             width: 80%;
