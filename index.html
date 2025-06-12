@@ -24,28 +24,29 @@
             --button-text: white;
             --button-hover-bg: #1f2937;
 
-            /* Новые переменные для цвета заголовка при наведении */
             --card-title-hover-color: #000000; /* Черный для светлой темы */
+            --underline-color: #3b82f6; /* Подчеркивание для светлой темы */
         }
 
-        /* Dark Theme (глубокая и насыщенная) */
+        /* Dark Theme (глубокая, насыщенная, "красивая") */
         body.dark-theme {
-            --bg-gradient-start: #0F1320;
-            --bg-gradient-end: #1C243B;
-            --header-gradient-start: #8E2DE2;
-            --header-gradient-end: #4A00E0;
-            --text-color-dark: #E6E6E6;
-            --text-color-light: #B0B0B0;
-            --card-bg: #2C354A;
-            --shadow-light: rgba(0, 0, 0, 0.4);
-            --shadow-medium: rgba(0, 0, 0, 0.6);
-            --card-title-gradient-start: #8E2DE2;
-            --card-title-gradient-end: #4A00E0;
-            --button-bg: #8E2DE2;
+            --bg-gradient-start: #0A0A1F; /* Очень тёмный, почти чёрный */
+            --bg-gradient-end: #1B1B3A; /* Глубокий тёмно-синий */
+            --header-gradient-start: #6A0DAD; /* Глубокий пурпурный */
+            --header-gradient-end: #3A0CA3; /* Насыщенный синий */
+            --text-color-dark: #E6E6E6; /* Светлый серый */
+            --text-color-light: #B0B0B0; /* Средний серый */
+            --card-bg: #222244; /* Тёмно-фиолетовый для карточек */
+            --shadow-light: rgba(0, 0, 0, 0.5); /* Более выраженные тени */
+            --shadow-medium: rgba(0, 0, 0, 0.7);
+            --card-title-gradient-start: #FF69B4; /* Яркий розовый */
+            --card-title-gradient-end: #8A2BE2; /* Сине-фиолетовый */
+            --button-bg: #8A2BE2;
             --button-text: white;
-            --button-hover-bg: #4A00E0;
+            --button-hover-bg: #6A0DAD;
 
-            --card-title-hover-color: #00ffff; /* Циан для тёмной темы */
+            --card-title-hover-color: #9932CC; /* Насыщенный пурпурный для тёмной темы */
+            --underline-color: #FF69B4; /* Розовое подчеркивание для тёмной темы */
         }
 
         /* Red Theme */
@@ -65,7 +66,8 @@
             --button-text: white;
             --button-hover-bg: #c0392b;
 
-            --card-title-hover-color: #ff0000; /* Красный для красной темы */
+            --card-title-hover-color: #ff0000;
+            --underline-color: #e74c3c;
         }
 
         /* Green Theme */
@@ -85,7 +87,8 @@
             --button-text: white;
             --button-hover-bg: #229a53;
 
-            --card-title-hover-color: #00ff00; /* Зеленый для зеленой темы */
+            --card-title-hover-color: #00ff00;
+            --underline-color: #27ae60;
         }
 
         /* Space Theme */
@@ -105,7 +108,8 @@
             --button-text: white;
             --button-hover-bg: #00ffff;
 
-            --card-title-hover-color: #ffff00; /* Жёлтый для космос темы */
+            --card-title-hover-color: #ffff00;
+            --underline-color: #00ffff;
         }
 
         body {
@@ -195,8 +199,11 @@
             display: flex;
             flex-direction: column;
             cursor: pointer;
-            align-items: center; /* Центрируем содержимое по горизонтали */
-            text-align: center; /* Центрируем текст */
+            align-items: center;
+            text-align: center;
+            /* Добавлено для решения проблем с анимацией дочерних элементов */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .photo-card:hover {
@@ -206,18 +213,17 @@
         
         .photo-card img {
             width: 100%;
-            height: 250px; /* Оптимальная высота для хорошей обрезки */
-            object-fit: cover; /* Изображение будет заполнять весь контейнер, обрезая лишнее */
+            height: 250px;
+            object-fit: cover;
             display: block;
             border-radius: 20px 20px 0 0;
             /* Добавлено для улучшения рендеринга и уменьшения шума */
-            transform: translate3d(0,0,0); /* Форсирует аппаратное ускорение */
-            -webkit-transform: translate3d(0,0,0); /* Для Webkit */
-            image-rendering: -webkit-optimize-contrast; /* Может помочь с чёткостью */
-            image-rendering: auto; /* Позволяет браузеру использовать свои лучшие методы */
-            will-change: transform, opacity; /* Подсказка для оптимизации анимации */
+            transform: translate3d(0,0,0);
+            -webkit-transform: translate3d(0,0,0);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: auto;
+            will-change: transform, opacity;
         }
-
 
         .card-content {
             padding: 20px;
@@ -226,48 +232,74 @@
             align-items: center;
             text-align: center;
             flex-grow: 1;
-            width: 100%; /* Убедимся, что контент занимает всю ширину */
+            width: 100%;
         }
 
         .card-title {
             font-size: 1.5em;
             font-weight: 600;
             margin-bottom: 10px;
-            /* Убран градиент для базового цвета */
             color: var(--text-color-dark); /* Базовый цвет из темы */
             transition: color 0.3s ease; /* Плавное изменение цвета */
             position: relative; 
             z-index: 1;
+            /* Для плавности подчеркивания */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translateZ(0); /* Для аппаратного ускорения */
         }
 
         /* Эффект при наведении: изменение цвета заголовка */
         .photo-card:hover .card-title {
-            color: var(--card-title-hover-color); /* Новый цвет при наведении */
+            color: var(--card-title-hover-color);
         }
 
-        /* Удалена проблемная линия */
-        /* .card-title::before, .photo-card:hover .card-title::before { } */
+        /* НОВОЕ: Подчеркивание с плавным появлением на transform */
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0); /* Скрыто по умолчанию */
+            transform-origin: center;
+            width: 100%; /* Полная ширина под заголовком */
+            max-width: 80px; /* Ограничим ширину линии, чтобы она не была слишком длинной */
+            height: 2px;
+            background: var(--underline-color); /* Цвет из переменной темы */
+            transition: transform 0.3s ease-out; /* Анимируем transform */
+            z-index: -1;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .photo-card:hover .card-title::after {
+            transform: translateX(-50%) scaleX(1); /* Появляется */
+        }
 
         .card-description {
             font-size: 0.95em;
             color: var(--text-color-light);
             line-height: 1.5;
-            /* Убрали max-height: 0; opacity: 0; для постоянного отображения */
-            max-height: 4.5em; /* Ограничиваем высоту 3 строками */
-            opacity: 1; /* Всегда виден */
             overflow: hidden;
-            padding-top: 0; /* Убрали анимацию паддинга */
-            transition: none; /* Убрали все переходы */
+            /* Скрыто по умолчанию, но БЕЗ пустого места */
+            max-height: 0; 
+            opacity: 0;
+            padding-top: 0;
+            margin-top: 0; /* Важно, чтобы не было пустого отступа */
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding-top 0.4s ease-out, margin-top 0.4s ease-out;
             
             display: -webkit-box;
             -webkit-line-clamp: 3; /* Ограничиваем до 3 строк */
             -webkit-box-orient: vertical;
             text-overflow: ellipsis; /* Добавляем многоточие если текст обрезается */
-            margin-top: 0; /* Убедимся, что нет лишнего отступа сверху */
         }
         
-        /* Убрали стили при наведении, т.к. описание видно всегда */
-        /* .photo-card:hover .card-description { } */
+        /* Появление описания при наведении */
+        .photo-card:hover .card-description {
+            max-height: 100px; /* Достаточная высота для 3+ строк */
+            opacity: 1;
+            padding-top: 10px; /* Вернем отступ при появлении */
+            margin-top: 5px; /* Небольшой отступ от заголовка */
+        }
 
         /* Keyframes for animations */
         @keyframes floatIn {
