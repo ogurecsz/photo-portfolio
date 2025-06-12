@@ -25,22 +25,22 @@
             --button-hover-bg: #1f2937;
         }
 
-        /* Dark Theme */
+        /* Dark Theme (более глубокая и насыщенная) */
         body.dark-theme {
-            --bg-gradient-start: #1a202c;
-            --bg-gradient-end: #2d3748;
-            --header-gradient-start: #667eea;
-            --header-gradient-end: #805ad5;
-            --text-color-dark: #edf2f7;
-            --text-color-light: #a0aec0;
-            --card-bg: #2d3748;
-            --shadow-light: rgba(255, 255, 255, 0.08);
-            --shadow-medium: rgba(255, 255, 255, 0.15);
-            --card-title-gradient-start: #667eea;
-            --card-title-gradient-end: #805ad5;
-            --button-bg: #667eea;
+            --bg-gradient-start: #0F1320; /* Очень тёмный, почти чёрный сине-фиолетовый */
+            --bg-gradient-end: #1C243B; /* Чуть светлее, тёмно-синий */
+            --header-gradient-start: #8E2DE2; /* Глубокий фиолетовый */
+            --header-gradient-end: #4A00E0; /* Темно-синий фиолетовый */
+            --text-color-dark: #E6E6E6; /* Светлый серый */
+            --text-color-light: #B0B0B0; /* Средний серый */
+            --card-bg: #2C354A; /* Тёмно-синий для карточек */
+            --shadow-light: rgba(0, 0, 0, 0.4); /* Более выраженные тени для контраста */
+            --shadow-medium: rgba(0, 0, 0, 0.6);
+            --card-title-gradient-start: #8E2DE2;
+            --card-title-gradient-end: #4A00E0;
+            --button-bg: #8E2DE2;
             --button-text: white;
-            --button-hover-bg: #805ad5;
+            --button-hover-bg: #4A00E0;
         }
 
         /* Red Theme */
@@ -91,7 +91,7 @@
             min-height: 100vh;
             padding: 40px 20px;
             box-sizing: border-box;
-            transition: background-color 0.5s ease, color 0.5s ease; /* Smooth theme transition */
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
         header {
@@ -109,7 +109,7 @@
             background: linear-gradient(45deg, var(--header-gradient-start), var(--header-gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: floatIn 1.5s ease-out forwards; /* Floating effect */
+            animation: floatIn 1.5s ease-out forwards;
             opacity: 0;
         }
 
@@ -162,7 +162,7 @@
             border-radius: 25px;
             box-shadow: 0 10px 25px var(--shadow-light);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease; /* Smooth theme transition */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
             display: flex;
             flex-direction: column;
             cursor: pointer;
@@ -173,12 +173,25 @@
             box-shadow: 0 15px 35px var(--shadow-medium);
         }
 
-        .photo-card img {
+        .photo-card-img-wrapper {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
+            /* Ограничиваем максимальную высоту враппера, чтобы картинки не были слишком большими */
+            max-height: 250px; 
+            overflow: hidden; /* Скрываем излишки, если картинка всё же больше */
+            display: flex; /* Используем flex для центрирования картинки */
+            justify-content: center;
+            align-items: center;
             border-radius: 20px 20px 0 0;
+            background-color: #f0f0f0; /* Фоновый цвет для пустых пространств */
+            box-sizing: border-box; /* Учитываем padding в размере */
+        }
+
+        .photo-card img {
+            width: 100%; /* Занимаем всю ширину контейнера */
+            height: auto; /* Высота подстраивается под пропорции */
+            display: block;
+            object-fit: contain; /* Сохраняет пропорции, вписывая изображение */
+            image-rendering: optimizeQuality; /* Улучшение качества изображения */
         }
 
         .card-content {
@@ -203,15 +216,17 @@
             font-size: 0.95em;
             color: var(--text-color-light);
             line-height: 1.5;
-            height: 0; /* Initially hidden */
+            max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: height 0.3s ease-out, opacity 0.3s ease-out;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding-top 0.5s ease-out; /* Плавное появление */
+            padding-top: 0;
         }
 
         .photo-card:hover .card-description {
-            height: auto; /* Reveal on hover */
+            max-height: 100px; /* Достаточная высота для текста */
             opacity: 1;
+            padding-top: 10px; /* Добавляем отступ сверху при появлении */
         }
 
         /* Keyframes for animations */
@@ -275,73 +290,93 @@
 
     <div class="gallery-container">
         <div class="photo-card">
-            <img src="images/1.jpg" alt="Фото 1 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/1.jpg" alt="Красивый закат над побережьем">
+            </div>
             <div class="card-content">
                 <div class="card-title">1 Место</div>
-                <p class="card-description">Захватывающий вид, который всегда будет вдохновлять.</p>
+                <p class="card-description">Завораживающий закат, окрашивающий небо в яркие краски над морским пейзажем.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/2.jpg" alt="Фото 2 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/2.jpg" alt="Старинное здание с куполом">
+            </div>
             <div class="card-content">
                 <div class="card-title">2 Место</div>
-                <p class="card-description">Момент, полный эмоций и неповторимой атмосферы.</p>
+                <p class="card-description">Величие старинной архитектуры, запечатленной изнутри купола здания.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/3.jpg" alt="Фото 3 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/3.jpg" alt="Длинная скала под облачным небом">
+            </div>
             <div class="card-content">
                 <div class="card-title">3 Место</div>
-                <p class="card-description">Яркое воспоминание, запечатленное на века.</p>
+                <p class="card-description">Мощные скалы под драматическим небом, создающие ощущение простора.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/4.jpg" alt="Фото 4 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/4.jpg" alt="Уютная бухта с песчаным пляжем">
+            </div>
             <div class="card-content">
                 <div class="card-title">4 Место</div>
-                <p class="card-description">Тишина и красота природы в одном кадре.</p>
+                <p class="card-description">Безмятежность песчаной бухты, омываемой спокойными морскими волнами.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/5.jpg" alt="Фото 5 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/5.jpg" alt="Ночное здание с ярким окном">
+            </div>
             <div class="card-content">
                 <div class="card-title">5 Место</div>
-                <p class="card-description">Удивительный пейзаж, который хочется пересматривать снова и снова.</p>
+                <p class="card-description">Яркий луч света из окна в ночном здании, добавляющий загадочности.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/6.jpg" alt="Фото 6 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/6.jpg" alt="Берег моря с утёсами в пасмурную погоду">
+            </div>
             <div class="card-content">
                 <div class="card-title">6 Место</div>
-                <p class="card-description">Волшебный закат, окрасивший небо в неповторимые цвета.</p>
+                <p class="card-description">Суровый, но красивый морской пейзаж с обрывистыми берегами.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/7.jpg" alt="Фото 7 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/7.jpg" alt="Купола старинной церкви">
+            </div>
             <div class="card-content">
                 <div class="card-title">7 Место</div>
-                <p class="card-description">Живое фото, передающее всю энергию момента.</p>
+                <p class="card-description">Величественные купола старинной церкви под ясным голубым небом.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/8.jpg" alt="Фото 8 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/8.jpg" alt="Городской пейзаж с высотными зданиями">
+            </div>
             <div class="card-content">
                 <div class="card-title">8 Место</div>
-                <p class="card-description">Гармония света и тени, создающая уникальный образ.</p>
+                <p class="card-description">Современная городская архитектура на фоне ярко-синего неба.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/9.jpg" alt="Фото 9 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/9.jpg" alt="Ночной город с мокрым асфальтом и светофорами">
+            </div>
             <div class="card-content">
                 <div class="card-title">9 Место</div>
-                <p class="card-description">Взгляд в даль, полный надежд и новых открытий.</p>
+                <p class="card-description">Огни ночного города, отражающиеся в мокром асфальте после дождя.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/10.jpg" alt="Фото 10 место">
+            <div class="photo-card-img-wrapper">
+                <img src="images/10.jpg" alt="Ночной город через воду">
+            </div>
             <div class="card-content">
                 <div class="card-title">10 Место</div>
-                <p class="card-description">Простота и изящество в одном кадре.</p>
+                <p class="card-description">Городские огни, мерцающие в водной глади ночного водоёма.</p>
             </div>
         </div>
     </div>
@@ -351,8 +386,8 @@
             const themeButtons = document.querySelectorAll('.theme-button');
             const body = document.body;
 
-            // Load saved theme from localStorage
-            const savedTheme = localStorage.getItem('selectedTheme') || 'light';
+            // Load saved theme from localStorage, or default to 'dark'
+            const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
             body.classList.add(savedTheme + '-theme');
 
             themeButtons.forEach(button => {
