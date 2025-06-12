@@ -1,74 +1,374 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Мои лучшие фото</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f9f9ff, #dbeafe);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя Фотогалерея — Лучшие Моменты</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            /* Default Light Theme */
+            --bg-gradient-start: #e0f2fe; /* Light blue */
+            --bg-gradient-end: #f3e8ff; /* Light purple */
+            --header-gradient-start: #3b82f6; /* Medium blue */
+            --header-gradient-end: #a78bfa; /* Medium purple */
+            --text-color-dark: #1f2937; /* Dark gray */
+            --text-color-light: #4b5563; /* Medium gray */
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --card-title-gradient-start: var(--header-gradient-start);
+            --card-title-gradient-end: var(--header-gradient-end);
+            --button-bg: #4b5563;
+            --button-text: white;
+            --button-hover-bg: #1f2937;
+        }
 
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 30px;
-      color: #1e3a8a;
-    }
+        /* Dark Theme */
+        body.dark-theme {
+            --bg-gradient-start: #1a202c;
+            --bg-gradient-end: #2d3748;
+            --header-gradient-start: #667eea;
+            --header-gradient-end: #805ad5;
+            --text-color-dark: #edf2f7;
+            --text-color-light: #a0aec0;
+            --card-bg: #2d3748;
+            --shadow-light: rgba(255, 255, 255, 0.08);
+            --shadow-medium: rgba(255, 255, 255, 0.15);
+            --card-title-gradient-start: #667eea;
+            --card-title-gradient-end: #805ad5;
+            --button-bg: #667eea;
+            --button-text: white;
+            --button-hover-bg: #805ad5;
+        }
 
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      max-width: 1300px;
-    }
+        /* Red Theme */
+        body.red-theme {
+            --bg-gradient-start: #fef2f2;
+            --bg-gradient-end: #fee2e2;
+            --header-gradient-start: #ef4444;
+            --header-gradient-end: #dc2626;
+            --text-color-dark: #4b0d0d;
+            --text-color-light: #881a1a;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --card-title-gradient-start: #ef4444;
+            --card-title-gradient-end: #dc2626;
+            --button-bg: #ef4444;
+            --button-text: white;
+            --button-hover-bg: #dc2626;
+        }
 
-    .photo-card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.3s;
-      width: 280px;
-    }
+        /* Green Theme */
+        body.green-theme {
+            --bg-gradient-start: #ecfdf5;
+            --bg-gradient-end: #d1fae5;
+            --header-gradient-start: #10b981;
+            --header-gradient-end: #059669;
+            --text-color-dark: #064e3b;
+            --text-color-light: #0d8a66;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --card-title-gradient-start: #10b981;
+            --card-title-gradient-end: #059669;
+            --button-bg: #10b981;
+            --button-text: white;
+            --button-hover-bg: #059669;
+        }
 
-    .photo-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-    }
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-color-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            transition: background-color 0.5s ease, color 0.5s ease; /* Smooth theme transition */
+        }
 
-    .photo-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 20px 20px 0 0;
-    }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 20px;
+        }
 
-    .label {
-      padding: 15px;
-      font-size: 1.2em;
-      color: #1e40af;
-    }
-  </style>
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(45deg, var(--header-gradient-start), var(--header-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: floatIn 1.5s ease-out forwards; /* Floating effect */
+            opacity: 0;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            font-weight: 400;
+            color: var(--text-color-light);
+            margin-top: 10px;
+        }
+
+        .theme-switcher {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .theme-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .theme-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background-color: var(--button-hover-bg);
+        }
+
+        .gallery-container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .photo-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            box-shadow: 0 10px 25px var(--shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease; /* Smooth theme transition */
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px var(--shadow-medium);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--card-title-gradient-start), var(--card-title-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-description {
+            font-size: 0.95em;
+            color: var(--text-color-light);
+            line-height: 1.5;
+            height: 0; /* Initially hidden */
+            opacity: 0;
+            overflow: hidden;
+            transition: height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .photo-card:hover .card-description {
+            height: auto; /* Reveal on hover */
+            opacity: 1;
+        }
+
+        /* Keyframes for animations */
+        @keyframes floatIn {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .subtitle {
+                font-size: 1em;
+            }
+            .gallery-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                padding: 15px;
+            }
+            .photo-card {
+                width: auto;
+            }
+            .theme-switcher {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            .subtitle {
+                font-size: 0.9em;
+            }
+            .gallery-container {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Топ-10 моих фотографий</h1>
-  <div class="gallery">
-    <div class="photo-card"><img src="images/1.jpg"><div class="label">1 место</div></div>
-    <div class="photo-card"><img src="images/2.jpg"><div class="label">2 место</div></div>
-    <div class="photo-card"><img src="images/3.jpg"><div class="label">3 место</div></div>
-    <div class="photo-card"><img src="images/4.jpg"><div class="label">4 место</div></div>
-    <div class="photo-card"><img src="images/5.jpg"><div class="label">5 место</div></div>
-    <div class="photo-card"><img src="images/6.jpg"><div class="label">6 место</div></div>
-    <div class="photo-card"><img src="images/7.jpg"><div class="label">7 место</div></div>
-    <div class="photo-card"><img src="images/8.jpg"><div class="label">8 место</div></div>
-    <div class="photo-card"><img src="images/9.jpg"><div class="label">9 место</div></div>
-    <div class="photo-card"><img src="images/10.jpg"><div class="label">10 место</div></div>
-  </div>
+    <header>
+        <h1>Топ-10 моих фотографий</h1>
+        <p class="subtitle">Коллекция лучших моментов, запечатленных в кадре</p>
+    </header>
+
+    <div class="theme-switcher">
+        <button class="theme-button" data-theme="light">Светлая тема</button>
+        <button class="theme-button" data-theme="dark">Тёмная тема</button>
+        <button class="theme-button" data-theme="red">Красная тема</button>
+        <button class="theme-button" data-theme="green">Зелёная тема</button>
+    </div>
+
+    <div class="gallery-container">
+        <div class="photo-card">
+            <img src="images/1.jpg" alt="Фото 1 место">
+            <div class="card-content">
+                <div class="card-title">1 Место</div>
+                <p class="card-description">Захватывающий вид, который всегда будет вдохновлять.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/2.jpg" alt="Фото 2 место">
+            <div class="card-content">
+                <div class="card-title">2 Место</div>
+                <p class="card-description">Момент, полный эмоций и неповторимой атмосферы.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/3.jpg" alt="Фото 3 место">
+            <div class="card-content">
+                <div class="card-title">3 Место</div>
+                <p class="card-description">Яркое воспоминание, запечатленное на века.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/4.jpg" alt="Фото 4 место">
+            <div class="card-content">
+                <div class="card-title">4 Место</div>
+                <p class="card-description">Тишина и красота природы в одном кадре.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/5.jpg" alt="Фото 5 место">
+            <div class="card-content">
+                <div class="card-title">5 Место</div>
+                <p class="card-description">Удивительный пейзаж, который хочется пересматривать снова и снова.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/6.jpg" alt="Фото 6 место">
+            <div class="card-content">
+                <div class="card-title">6 Место</div>
+                <p class="card-description">Волшебный закат, окрасивший небо в неповторимые цвета.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/7.jpg" alt="Фото 7 место">
+            <div class="card-content">
+                <div class="card-title">7 Место</div>
+                <p class="card-description">Живое фото, передающее всю энергию момента.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/8.jpg" alt="Фото 8 место">
+            <div class="card-content">
+                <div class="card-title">8 Место</div>
+                <p class="card-description">Гармония света и тени, создающая уникальный образ.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/9.jpg" alt="Фото 9 место">
+            <div class="card-content">
+                <div class="card-title">9 Место</div>
+                <p class="card-description">Взгляд в даль, полный надежд и новых открытий.</p>
+            </div>
+        </div>
+        <div class="photo-card">
+            <img src="images/10.jpg" alt="Фото 10 место">
+            <div class="card-content">
+                <div class="card-title">10 Место</div>
+                <p class="card-description">Простота и изящество в одном кадре.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeButtons = document.querySelectorAll('.theme-button');
+            const body = document.body;
+
+            // Load saved theme from localStorage
+            const savedTheme = localStorage.getItem('selectedTheme') || 'light';
+            body.classList.add(savedTheme + '-theme');
+
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const theme = button.dataset.theme;
+
+                    // Remove existing theme classes
+                    body.classList.remove('light-theme', 'dark-theme', 'red-theme', 'green-theme');
+                    // Add new theme class
+                    body.classList.add(theme + '-theme');
+
+                    // Save selected theme to localStorage
+                    localStorage.setItem('selectedTheme', theme);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
