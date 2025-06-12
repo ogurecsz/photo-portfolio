@@ -109,7 +109,7 @@
             min-height: 100vh;
             padding: 40px 20px;
             box-sizing: border-box;
-            transition: background 0.5s ease, color 0.5s ease; /* Плавный переход для фона */
+            transition: background 0.5s ease, color 0.5s ease;
         }
 
         header {
@@ -168,7 +168,7 @@
 
         .gallery-container {
             width: 100%;
-            max-width: 1500px; /* Увеличена максимальная ширина для широких экранов */
+            max-width: 1200px; /* Вернул прежнюю максимальную ширину */
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
@@ -190,27 +190,15 @@
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 35px var(--shadow-medium);
         }
-
-        .photo-card-img-wrapper {
-            width: 100%;
-            padding-bottom: 75%; /* Соотношение сторон 4:3 (для 16:9 будет 56.25%) */
-            /* ИЛИ: min-height: 200px; max-height: 300px; для более фиксированных размеров */
-            position: relative; /* Для позиционирования img внутри */
-            overflow: hidden;
-            border-radius: 20px 20px 0 0;
-            background-color: var(--card-bg); /* Цвет фона враппера, если картинка не заполняет его */
-        }
-
+        
+        /* Изменения для изображений: вернули object-fit: cover */
         .photo-card img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: contain; /* Сохраняет пропорции, вписывая изображение */
-            object-position: center; /* Центрирует изображение */
+            height: 200px; /* Фиксированная высота для единообразия карточек */
+            object-fit: cover; /* Изображение будет заполнять весь контейнер, обрезая лишнее */
             display: block;
-            image-rendering: optimizeQuality;
+            border-radius: 20px 20px 0 0;
+            /* Убрали background-color и padding отсюда */
         }
 
         .card-content {
@@ -229,6 +217,25 @@
             background: linear-gradient(45deg, var(--card-title-gradient-start), var(--card-title-gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            position: relative; /* Для эффекта свечения */
+            z-index: 1;
+        }
+
+        /* Эффект свечения под заголовком */
+        .card-title::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--card-title-gradient-start), var(--card-title-gradient-end));
+            transition: width 0.3s ease-out;
+            z-index: -1;
+        }
+        .photo-card:hover .card-title::before {
+            width: 80%;
         }
 
         .card-description {
@@ -254,28 +261,6 @@
             padding-top: 10px;
         }
 
-        /* "Фишка": Эффект свечения при наведении на заголовок карточки */
-        .card-title {
-            position: relative;
-            z-index: 1;
-        }
-        .card-title::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--card-title-gradient-start), var(--card-title-gradient-end));
-            transition: width 0.3s ease-out;
-            z-index: -1;
-        }
-        .photo-card:hover .card-title::before {
-            width: 80%;
-        }
-
-
         /* Keyframes for animations */
         @keyframes floatIn {
             0% {
@@ -289,13 +274,6 @@
         }
 
         /* Responsive adjustments */
-        @media (min-width: 1200px) {
-            /* Для очень широких экранов, больше 4 колонок */
-            .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                /* Добавим более крупные gap или max-width при необходимости */
-            }
-        }
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5em;
@@ -345,90 +323,70 @@
 
     <div class="gallery-container">
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/1.jpg" alt="Красивый закат над побережьем">
-            </div>
+            <img src="images/1.jpg" alt="Красивый закат над побережьем">
             <div class="card-content">
                 <div class="card-title">1 Место</div>
                 <p class="card-description">Завораживающий закат, окрашивающий небо в яркие краски над морским пейзажем. </p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/2.jpg" alt="Старинное здание с куполом">
-            </div>
+            <img src="images/2.jpg" alt="Старинное здание с куполом">
             <div class="card-content">
                 <div class="card-title">2 Место</div>
                 <p class="card-description">Величие старинной архитектуры, запечатленной изнутри купола здания.</p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/3.jpg" alt="Длинная скала под облачным небом">
-            </div>
+            <img src="images/3.jpg" alt="Длинная скала под облачным небом">
             <div class="card-content">
                 <div class="card-title">3 Место</div>
                 <p class="card-description">Мощные скалы под драматическим небом, создающие ощущение простора.</p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/4.jpg" alt="Уютная бухта с песчаным пляжем">
-            </div>
+            <img src="images/4.jpg" alt="Уютная бухта с песчаным пляжем">
             <div class="card-content">
                 <div class="card-title">4 Место</div>
                 <p class="card-description">Безмятежность песчаной бухты, омываемой спокойными морскими волнами.</p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/5.jpg" alt="Ночное здание с ярким окном">
-            </div>
+            <img src="images/5.jpg" alt="Ночное здание с ярким окном">
             <div class="card-content">
                 <div class="card-title">5 Место</div>
                 <p class="card-description">Яркий луч света из окна в ночном здании, добавляющий загадочности.</p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/6.jpg" alt="Берег моря с утёсами в пасмурную погоду">
-            </div>
+            <img src="images/6.jpg" alt="Берег моря с утёсами в пасмурную погоду">
             <div class="card-content">
                 <div class="card-title">6 Место</div>
                 <p class="card-description">Суровый, но красивый морской пейзаж с обрывистыми берегами.</p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/7.jpg" alt="Купола старинной церкви">
-            </div>
+            <img src="images/7.jpg" alt="Купола старинной церкви">
             <div class="card-content">
                 <div class="card-title">7 Место</div>
                 <p class="card-description">Величественные купола старинной церкви под ясным голубым небом.</p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/8.jpg" alt="Городской пейзаж с высотными зданиями">
-            </div>
+            <img src="images/8.jpg" alt="Городской пейзаж с высотными зданиями">
             <div class="card-content">
                 <div class="card-title">8 Место</div>
                 <p class="card-description">Современная городская архитектура на фоне ярко-синего неба.</p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/9.jpg" alt="Ночной город с мокрым асфальтом и светофорами">
-            </div>
+            <img src="images/9.jpg" alt="Ночной город с мокрым асфальтом и светофорами">
             <div class="card-content">
                 <div class="card-title">9 Место</div>
                 <p class="card-description">Огни ночного города, отражающиеся в мокром асфальте после дождя.</p>
             </div>
         </div>
         <div class="photo-card">
-            <div class="photo-card-img-wrapper">
-                <img src="images/10.jpg" alt="Ночной город через воду">
-            </div>
+            <img src="images/10.jpg" alt="Ночной город через воду">
             <div class="card-content">
                 <div class="card-title">10 Место</div>
                 <p class="card-description">Городские огни, мерцающие в водной глади ночного водоёма.</p>
