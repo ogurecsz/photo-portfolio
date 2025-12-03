@@ -3,433 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моя Фотогалерея — Лучшие Моменты</title>
+    <title>Моя Фотогалерея — Топ-10</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root {
-            /* Default Light Theme */
-            --bg-gradient-start: #e0f2fe;
-            --bg-gradient-end: #f3e8ff;
-            --header-gradient-start: #3b82f6;
-            --header-gradient-end: #a78bfa;
-            --text-color-dark: #1f2937;
-            --text-color-light: #4b5563;
-            --card-bg: #ffffff;
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-            --card-title-gradient-start: var(--header-gradient-start);
-            --card-title-gradient-end: var(--header-gradient-end);
-            --button-bg: #4b5563;
-            --button-text: white;
-            --button-hover-bg: #1f2937;
-
-            --card-title-hover-color: #000000; /* Черный для светлой темы */
-            --underline-color: #3b82f6; /* Подчеркивание для светлой темы */
-        }
-
-        /* Dark Theme (глубокая, насыщенная, "красивая") */
-        body.dark-theme {
-            --bg-gradient-start: #0A0A1F; /* Очень тёмный, почти чёрный */
-            --bg-gradient-end: #1B1B3A; /* Глубокий тёмно-синий */
-            --header-gradient-start: #6A0DAD; /* Глубокий пурпурный */
-            --header-gradient-end: #3A0CA3; /* Насыщенный синий */
-            --text-color-dark: #E6E6E6; /* Светлый серый */
-            --text-color-light: #B0B0B0; /* Средний серый */
-            --card-bg: #222244; /* Тёмно-фиолетовый для карточек */
-            --shadow-light: rgba(0, 0, 0, 0.5); /* Более выраженные тени */
-            --shadow-medium: rgba(0, 0, 0, 0.7);
-            --card-title-gradient-start: #FF69B4; /* Яркий розовый */
-            --card-title-gradient-end: #8A2BE2; /* Сине-фиолетовый */
-            --button-bg: #8A2BE2;
-            --button-text: white;
-            --button-hover-bg: #6A0DAD;
-
-            --card-title-hover-color: #9932CC; /* Насыщенный пурпурный для тёмной темы */
-            --underline-color: #FF69B4; /* Розовое подчеркивание для тёмной темы */
-        }
-
-        /* Red Theme */
-        body.red-theme {
-            --bg-gradient-start: #ffe0e0;
-            --bg-gradient-end: #ffc0c0;
-            --header-gradient-start: #e74c3c;
-            --header-gradient-end: #c0392b;
-            --text-color-dark: #7b241c;
-            --text-color-light: #a93226;
-            --card-bg: #ffffff;
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-            --card-title-gradient-start: #e74c3c;
-            --card-title-gradient-end: #c0392b;
-            --button-bg: #e74c3c;
-            --button-text: white;
-            --button-hover-bg: #c0392b;
-
-            --card-title-hover-color: #ff0000;
-            --underline-color: #e74c3c;
-        }
-
-        /* Green Theme */
-        body.green-theme {
-            --bg-gradient-start: #e0ffe0;
-            --bg-gradient-end: #c0ffc0;
-            --header-gradient-start: #27ae60;
-            --header-gradient-end: #229a53;
-            --text-color-dark: #196f3d;
-            --text-color-light: #238a4d;
-            --card-bg: #ffffff;
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-            --card-title-gradient-start: #27ae60;
-            --card-title-gradient-end: #229a53;
-            --button-bg: #27ae60;
-            --button-text: white;
-            --button-hover-bg: #229a53;
-
-            --card-title-hover-color: #00ff00;
-            --underline-color: #27ae60;
-        }
-
-        /* Space Theme */
-        body.space-theme {
-            --bg-gradient-start: #0f0c29;
-            --bg-gradient-end: #302b63;
-            --header-gradient-start: #ff00ff;
-            --header-gradient-end: #00ffff;
-            --text-color-dark: #e0f7fa;
-            --text-color-light: #a7d9de;
-            --card-bg: #1e1e3f;
-            --shadow-light: rgba(0, 255, 255, 0.15);
-            --shadow-medium: rgba(0, 255, 255, 0.3);
-            --card-title-gradient-start: #ff00ff;
-            --card-title-gradient-end: #00ffff;
-            --button-bg: #ff00ff;
-            --button-text: white;
-            --button-hover-bg: #00ffff;
-
-            --card-title-hover-color: #ffff00;
-            --underline-color: #00ffff;
-        }
-
-        body {
+/* ###########################################
+# 3. 🔥 css: максимальное улучшение
+# CSS полностью переписан и оптимизирован. 
+# Используем селектор all для сброса box-sizing.
+###########################################
+*/
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-            color: var(--text-color-dark);
+            padding: 0;
+        }
+
+        :root {
+            /* Default Dark Theme (установлен как основной, т.к. он сильнее всего) */
+            --color-primary: #6A0DAD; /* Пурпурный */
+            --color-secondary: #FF69B4; /* Розовый */
+            --color-text-light: #E6E6E6;
+            --color-text-subtle: #B0B0B0;
+            --color-background-start: #0A0A1F;
+            --color-background-end: #1B1B3A;
+            --color-card-bg: #222244;
+            --shadow-intensity: rgba(0, 0, 0, 0.7);
+            --animation-speed: 0.3s;
+            --font-main: 'Montserrat', sans-serif;
+        }
+
+        /* --- Theme Variables --- */
+        body.light-theme {
+            --color-primary: #3b82f6;
+            --color-secondary: #a78bfa;
+            --color-text-light: #1f2937;
+            --color-text-subtle: #4b5563;
+            --color-background-start: #e0f2fe;
+            --color-background-end: #f3e8ff;
+            --color-card-bg: #ffffff;
+            --shadow-intensity: rgba(0, 0, 0, 0.15);
+        }
+
+        body.red-theme {
+            --color-primary: #e74c3c;
+            --color-secondary: #c0392b;
+            --color-text-light: #7b241c;
+            --color-text-subtle: #a93226;
+            --color-background-start: #ffe0e0;
+            --color-background-end: #ffc0c0;
+            --color-card-bg: #ffffff;
+        }
+
+        body.green-theme {
+            --color-primary: #27ae60;
+            --color-secondary: #229a53;
+            --color-text-light: #196f3d;
+            --color-text-subtle: #238a4d;
+            --color-background-start: #e0ffe0;
+            --color-background-end: #c0ffc0;
+            --color-card-bg: #ffffff;
+        }
+
+        body.space-theme {
+            --color-primary: #ff00ff;
+            --color-secondary: #00ffff;
+            --color-text-light: #e0f7fa;
+            --color-text-subtle: #a7d9de;
+            --color-background-start: #0f0c29;
+            --color-background-end: #302b63;
+            --color-card-bg: #1e1e3f;
+            --shadow-intensity: rgba(0, 255, 255, 0.3);
+        }
+
+        /* --- Base Layout --- */
+        body {
+            font-family: var(--font-main);
+            background: linear-gradient(135deg, var(--color-background-start) 0%, var(--color-background-end) 100%);
+            color: var(--color-text-light);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             padding: 40px 20px;
-            box-sizing: border-box;
-            transition: background 0.5s ease, color 0.5s ease;
+            /* Аппаратное ускорение для смены темы */
+            transition: background var(--animation-speed) ease, color var(--animation-speed) ease;
+            will-change: background, color; 
         }
 
         header {
             text-align: center;
             margin-bottom: 50px;
-            padding: 20px;
         }
 
         h1 {
-            font-size: 3.5em;
+            font-size: clamp(2.5em, 5vw, 3.5em); /* Адаптивный размер */
             font-weight: 700;
-            margin: 0;
             letter-spacing: -1px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            background: linear-gradient(45deg, var(--header-gradient-start), var(--header-gradient-end));
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: floatIn 1.5s ease-out forwards;
             opacity: 0;
+            animation: floatIn 1.5s ease-out forwards;
         }
 
         .subtitle {
-            font-size: 1.3em;
-            font-weight: 400;
-            color: var(--text-color-light);
+            font-size: 1.1em;
+            color: var(--color-text-subtle);
             margin-top: 10px;
         }
 
         .theme-switcher {
             margin-bottom: 30px;
             display: flex;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .theme-button {
-            padding: 10px 20px;
+            padding: 8px 16px;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--font-main);
             font-weight: 600;
-            font-size: 1em;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            background-color: var(--button-bg);
-            color: var(--button-text);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all var(--animation-speed) ease;
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
         }
 
         .theme-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-            background-color: var(--button-hover-bg);
+            opacity: 0.9;
         }
 
+        /* --- Gallery Grid --- */
         .gallery-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1280px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 20px;
+            /* Использование auto-fit для идеальной адаптивности */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 10px;
         }
 
+        /* --- Card Styles --- */
         .photo-card {
-            background: var(--card-bg);
-            border-radius: 25px;
-            box-shadow: 0 10px 25px var(--shadow-light);
+            background: var(--color-card-bg);
+            border-radius: 18px;
+            box-shadow: 0 8px 20px var(--shadow-intensity);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
-            cursor: pointer;
-            align-items: center;
-            text-align: center;
-            /* Добавлено для решения проблем с анимацией дочерних элементов */
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
+            
+            /* Аппаратное ускорение для hover-эффектов */
+            transition: transform var(--animation-speed) ease, box-shadow var(--animation-speed) ease;
+            will-change: transform, box-shadow; 
         }
 
         .photo-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 35px var(--shadow-medium);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 15px 30px var(--shadow-intensity);
         }
         
+        /* --- Image Styles --- */
         .photo-card img {
             width: 100%;
-            height: 250px;
+            height: 280px; /* Увеличил высоту для лучшего вида */
             object-fit: cover;
             display: block;
-            border-radius: 20px 20px 0 0;
-            /* Добавлено для улучшения рендеринга и уменьшения шума */
-            transform: translate3d(0,0,0);
-            -webkit-transform: translate3d(0,0,0);
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: auto;
-            will-change: transform, opacity;
+            border-radius: 18px 18px 0 0;
+            /* Убедимся, что рендеринг изображения максимально плавный */
+            transform: translateZ(0); 
+            will-change: transform;
         }
 
+        /* --- Content & Effects --- */
         .card-content {
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             text-align: center;
             flex-grow: 1;
-            width: 100%;
         }
 
         .card-title {
-            font-size: 1.5em;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-color-dark); /* Базовый цвет из темы */
-            transition: color 0.3s ease; /* Плавное изменение цвета */
-            position: relative; 
-            z-index: 1;
-            /* Для плавности подчеркивания */
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            transform: translateZ(0); /* Для аппаратного ускорения */
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            color: var(--color-primary); /* Заголовок всегда цвета primary */
+            transition: color var(--animation-speed) ease;
         }
-
-        /* Эффект при наведении: изменение цвета заголовка */
+        
+        /* Иконка и цвет при наведении */
         .photo-card:hover .card-title {
-            color: var(--card-title-hover-color);
+            color: var(--color-secondary);
+        }
+        .card-title i {
+            margin-right: 8px;
+            font-size: 0.9em;
+            transition: transform var(--animation-speed) ease;
+        }
+        .photo-card:hover .card-title i {
+            transform: scale(1.1) rotate(5deg);
         }
 
-        /* НОВОЕ: Подчеркивание с плавным появлением на transform */
+        /* Подчеркивание */
         .card-title::after {
             content: '';
             position: absolute;
             bottom: -5px;
             left: 50%;
-            transform: translateX(-50%) scaleX(0); /* Скрыто по умолчанию */
-            transform-origin: center;
-            width: 100%; /* Полная ширина под заголовком */
-            max-width: 80px; /* Ограничим ширину линии, чтобы она не была слишком длинной */
-            height: 2px;
-            background: var(--underline-color); /* Цвет из переменной темы */
-            transition: transform 0.3s ease-out; /* Анимируем transform */
-            z-index: -1;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
+            transform: translateX(-50%) scaleX(0);
+            width: 80%; /* Сделаем линию шире для красоты */
+            height: 3px;
+            background: var(--color-secondary);
+            transition: transform var(--animation-speed) ease-out;
+            will-change: transform;
         }
         .photo-card:hover .card-title::after {
-            transform: translateX(-50%) scaleX(1); /* Появляется */
+            transform: translateX(-50%) scaleX(1);
         }
 
         .card-description {
-            font-size: 0.95em;
-            color: var(--text-color-light);
+            font-size: 0.9em;
+            color: var(--color-text-subtle);
             line-height: 1.5;
             overflow: hidden;
-            /* Скрыто по умолчанию, но БЕЗ пустого места */
             max-height: 0; 
             opacity: 0;
             padding-top: 0;
-            margin-top: 0; /* Важно, чтобы не было пустого отступа */
-            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding-top 0.4s ease-out, margin-top 0.4s ease-out;
+            margin-top: 0;
             
-            display: -webkit-box;
-            -webkit-line-clamp: 3; /* Ограничиваем до 3 строк */
-            -webkit-box-orient: vertical;
-            text-overflow: ellipsis; /* Добавляем многоточие если текст обрезается */
+            /* Используем только max-height и opacity для плавности */
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding-top 0.4s ease-out;
         }
         
-        /* Появление описания при наведении */
         .photo-card:hover .card-description {
-            max-height: 100px; /* Достаточная высота для 3+ строк */
+            max-height: 100px; /* Раскрываем описание */
             opacity: 1;
-            padding-top: 10px; /* Вернем отступ при появлении */
-            margin-top: 5px; /* Небольшой отступ от заголовка */
+            padding-top: 15px;
         }
-
-        /* Keyframes for animations */
+        
+        /* --- Animations --- */
         @keyframes floatIn {
-            0% {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-            .subtitle {
-                font-size: 1em;
-            }
-            .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                padding: 15px;
-            }
-            .photo-card {
-                width: auto;
-            }
-            .theme-switcher {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2em;
-            }
-            .subtitle {
-                font-size: 0.9em;
-            }
-            .gallery-container {
-                grid-template-columns: 1fr;
-                padding: 10px;
-            }
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
-<body>
+<body class="dark-theme"> 
     <header>
         <h1>Топ-10 моих фотографий</h1>
-        <p class="subtitle">Коллекция лучших моментов, запечатленных в кадре</p>
+        <p class="subtitle">Отборная коллекция моментов от ez ra1d</p>
     </header>
 
     <div class="theme-switcher">
-        <button class="theme-button" data-theme="light">Светлая тема</button>
-        <button class="theme-button" data-theme="dark">Тёмная тема</button>
-        <button class="theme-button" data-theme="red">Красная тема</button>
-        <button class="theme-button" data-theme="green">Зелёная тема</button>
-        <button class="theme-button" data-theme="space">Космос тема</button>
+        <button class="theme-button" data-theme="dark">Тёмный Нуар</button>
+        <button class="theme-button" data-theme="light">Светлый Кэжуал</button>
+        <button class="theme-button" data-theme="red">Красный Драйв</button>
+        <button class="theme-button" data-theme="green">Зелёная Природа</button>
+        <button class="theme-button" data-theme="space">Космос Вайб</button>
     </div>
 
     <div class="gallery-container">
         <div class="photo-card">
-            <img src="images/1.jpg" alt="Красивый закат над побережьем">
+            <img src="images/1000061084.jpg" alt="Мощные скалы и идеальная голубая бухта">
             <div class="card-content">
-                <div class="card-title">1 Место</div>
-                <p class="card-description">Завораживающий закат, окрашивающий небо в яркие краски над морским пейзажем. </p>
+                <div class="card-title"><i class="fas fa-trophy"></i>Бухта & Горы</div>
+                <p class="card-description">Безусловный лидер. Идеальный свет, чистая композиция и мощь природы. Классика пейзажа.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/2.jpg" alt="Старинное здание с куполом">
+            <img src="images/1000069315.jpg" alt="Киберпанк поезд на фоне Сити">
             <div class="card-content">
-                <div class="card-title">2 Место</div>
-                <p class="card-description">Величие старинной архитектуры, запечатленной изнутри купола здания.</p>
+                <div class="card-title"><i class="fas fa-train"></i>Киберпанк-Экспресс</div>
+                <p class="card-description">Лучший урбанистический снимок. Контраст неонового красного и туманного ночного города. Стиль и агрессия.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/3.jpg" alt="Длинная скала под облачным небом">
+            <img src="images/1000050241.jpg" alt="Эпичный закат над древней крепостью">
             <div class="card-content">
-                <div class="card-title">3 Место</div>
-                <p class="card-description">Мощные скалы под драматическим небом, создающие ощущение простора.</p>
+                <div class="card-title"><i class="fas fa-mountain"></i>Эпик Закат</div>
+                <p class="card-description">Драматический кадр. Лучи пробиваются сквозь облака над силуэтом старинной крепости. Момент поклонения природе.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/4.jpg" alt="Уютная бухта с песчаным пляжем">
+            <img src="images/1000069294.jpg" alt="Мост через ночную реку в городе">
             <div class="card-content">
-                <div class="card-title">4 Место</div>
-                <p class="card-description">Безмятежность песчаной бухты, омываемой спокойными морскими волнами.</p>
+                <div class="card-title"><i class="fas fa-water"></i>Ночной Поток</div>
+                <p class="card-description">Длинная выдержка. Огни города отражаются в спокойной водной глади. Красивое сочетание желтых и синих тонов.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/5.jpg" alt="Ночное здание с ярким окном">
+            <img src="images/1000062130.jpg" alt="Зимняя набережная со снегом и фонарями">
             <div class="card-content">
-                <div class="card-title">5 Место</div>
-                <p class="card-description">Яркий луч света из окна в ночном здании, добавляющий загадочности.</p>
+                <div class="card-title"><i class="fas fa-snowboarding"></i>Зимний Уют</div>
+                <p class="card-description">Лучшее фото со снегом и силуэтами людей. Атмосфера холода, но при этом чувство жизни в кадре.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/6.jpg" alt="Берег моря с утёсами в пасмурную погоду">
+            <img src="images/1000069781.jpg" alt="Провода ЛЭП в густом белом тумане">
             <div class="card-content">
-                <div class="card-title">6 Место</div>
-                <p class="card-description">Суровый, но красивый морской пейзаж с обрывистыми берегами.</p>
+                <div class="card-title"><i class="fas fa-bolt"></i>Арт-Хаус ЛЭП</div>
+                <p class="card-description">Самый стильный минимализм. Графичный кадр, где туман стирает все лишнее, оставляя только геометрию проводов.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/7.jpg" alt="Купола старинной церкви">
+            <img src="images/1000050245.jpg" alt="Мощная белая скала и море">
             <div class="card-content">
-                <div class="card-title">7 Место</div>
-                <p class="card-description">Величественные купола старинной церкви под ясным голубым небом.</p>
+                <div class="card-title"><i class="fas fa-sun"></i>Белая Скала</div>
+                <p class="card-description">Мощь и текстура камня. Отличная работа с контрастом светлой скалы и темного моря. Чистый, сильный пейзаж.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/8.jpg" alt="Городской пейзаж с высотными зданиями">
+            <img src="images/1000050101.jpg" alt="Извилистая горная дорога на закате">
             <div class="card-content">
-                <div class="card-title">8 Место</div>
-                <p class="card-description">Современная городская архитектура на фоне ярко-синего неба.</p>
+                <div class="card-title"><i class="fas fa-road"></i>Дорога к Солнцу</div>
+                <p class="card-description">Отличные ведущие линии, которые ведут взгляд к яркому закату. Классика для travel-тематики.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/9.jpg" alt="Ночной город с мокрым асфальтом и светофорами">
+            <img src="images/1000069242.jpg" alt="Вершины Москва-Сити, скрытые в тумане">
             <div class="card-content">
-                <div class="card-title">9 Место</div>
-                <p class="card-description">Огни ночного города, отражающиеся в мокром асфальте после дождя.</p>
+                <div class="card-title"><i class="fas fa-city"></i>Сити в Дымке</div>
+                <p class="card-description">Масштабный кадр. Туман придает башням мистический и нереальный вид, подчеркивая их высоту.</p>
             </div>
         </div>
         <div class="photo-card">
-            <img src="images/10.jpg" alt="Ночной город через воду">
+            <img src="images/1000062665.jpg" alt="Вид сверху на двор-колодец">
             <div class="card-content">
-                <div class="card-title">10 Место</div>
-                <p class="card-description">Городские огни, мерцающие в водной глади ночного водоёма.</p>
+                <div class="card-title"><i class="fas fa-compress-alt"></i>Двор-Колодец</div>
+                <p class="card-description">Ощущение клаустрофобии и геометрической точности. Необычный ракурс, который хорошо завершает галерею.</p>
             </div>
         </div>
     </div>
@@ -439,20 +346,19 @@
             const themeButtons = document.querySelectorAll('.theme-button');
             const body = document.body;
 
-            // Load saved theme from localStorage, or default to 'dark'
+            // Устанавливаем дефолтную тему 'dark' или загружаем сохраненную
             const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
-            body.classList.add(savedTheme + '-theme');
+            body.className = savedTheme + '-theme';
 
             themeButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const theme = button.dataset.theme;
 
-                    // Remove existing theme classes
-                    body.classList.remove('light-theme', 'dark-theme', 'red-theme', 'green-theme', 'space-theme');
-                    // Add new theme class
+                    // Очистка и добавление нового класса
+                    body.className = '';
                     body.classList.add(theme + '-theme');
 
-                    // Save selected theme to localStorage
+                    // Сохраняем тему
                     localStorage.setItem('selectedTheme', theme);
                 });
             });
